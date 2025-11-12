@@ -1,5 +1,7 @@
-name: test-mnt
+name: Mnt Write
 on:
+  schedule:
+    - cron: "*/5 * * * *"
   workflow_dispatch:
 
 jobs:
