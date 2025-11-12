@@ -1,0 +1,34 @@
+name: Fill Mnt
+on:
+  workflow_dispatch:
+    inputs:
+      gigabytes:
+        description: 'Number of gigabytes to write to /mnt'
+        required: true
+        default: '1'
+        type: string
+
+jobs:
+  test:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Check /mnt before write
+        run: |
+          echo "=== /mnt contents before write ==="
+          sudo ls -lRa /mnt
+          echo "=== Disk space before write ==="
+          df -h /mnt
+      
+      - name: Write data to /mnt
+        run: |
+          GIGABYTES="${{ inputs.gigabytes || '1' }}"
+          echo "Writing ${GIGABYTES}GB to /mnt/testfile"
+          sudo dd if=/dev/zero of=/mnt/testfile bs=1G count=${GIGABYTES} status=progress
+          echo "Write complete"
+      
+      - name: Check /mnt after write
+        run: |
+          echo "=== /mnt contents after write ==="
+          sudo ls -lRa /mnt
+          echo "=== Disk space after write ==="
+          df -h /mnt
