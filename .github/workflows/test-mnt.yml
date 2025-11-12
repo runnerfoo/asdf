@@ -1,10 +1,10 @@
-name: test-mnt
+name: test-mnt-22
 on:
   workflow_dispatch:
 
 jobs:
   test:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-22.04
     steps:
       - run: |
           sudo ls -lRa /mnt
