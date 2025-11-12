@@ -1,0 +1,12 @@
+name: test-mnt
+on:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-22.04
+    steps:
+      - run: |
+          sudo ls -lRa /mnt
+          sudo touch /mnt/leaky
+          sudo ls -lRa /mnt
